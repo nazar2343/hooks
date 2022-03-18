@@ -3,41 +3,32 @@ import React, { useState, useEffect } from 'react'
 
 const App = () => {
 
-  function competitionRandomNumber() {
-    console.log('Some calculations...')
-    return Math.trunc(Math.random() * 20)
-  }
+  const [type, setType] = useState('users')
+  const [data, setData] = useState([])
 
-  function updateTitle() {
-    setState((prev) => {
-      return {
-      ...prev,
-      title: 'Нова заголовок'
-    }
-  })
-  }
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/${type}`)
+      .then(response => response.json())
+      .then(json => setData(json))
+  },[type])
 
-  const [counter, setCounter] = useState(() => competitionRandomNumber())
-  const [state, setState] = useState({
-    title: 'Лічильник',
-    date: Date.now()
-  })
+  useEffect(() => {
+    localStorage.setItem('data', JSON.stringify(data))
+  },[data])
 
-  const increment = () => {
-    setCounter((prev) => prev + 1)
-  }
-
-  const decrement = () => {
-    setCounter(counter - 1)
-  }
+  useEffect(() => {
+    const raw = localStorage.getItem('data') || []
+    setData(JSON.parse(raw))
+  }, [])
 
   return (
     <div>
-      <h1>Лічильник: {counter}</h1>
-      <button className='success' onClick={increment}>Додати</button>
-      <button className='danger' onClick={decrement}>Забрати</button>
-      <button className='yellow' onClick={updateTitle}>Змінити назву</button>
-      <pre>{JSON.stringify(state, null, 2)}</pre>
+      <h1>Ресурс: {type}</h1>
+      <button onClick={() => setType('users')}>Користувачі</button>
+      <button onClick={() => setType('todo')}>Todo</button>
+      <button onClick={() => setType('posts')}>Пости</button>
+
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 }
