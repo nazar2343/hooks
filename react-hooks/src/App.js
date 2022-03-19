@@ -3,33 +3,26 @@ import React, { useState, useEffect } from 'react'
 
 const App = () => {
 
-  const [type, setType] = useState('users')
-  const [data, setData] = useState([])
-
+  const [resource, setResource] = useState('posts')
+  const [items, setItems] = useState([])
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/${type}`)
+    fetch(`https://jsonplaceholder.typicode.com/${resource}`)
       .then(response => response.json())
-      .then(json => setData(json))
-  },[type])
-
-  // useEffect(() => {
-  //   localStorage.setItem('data', JSON.stringify(data))
-  // },[data])
-
-  // useEffect(() => {
-  //   const raw = localStorage.getItem('data') || []
-  //   setData(JSON.parse(raw))
-  // }, [])
+      .then(json => setItems(json))
+  }, [resource])
 
   return (
-    <div>
-      <h1>Ресурс: {type}</h1>
-      <button onClick={() => setType('users')}>Користувачі</button>
-      <button onClick={() => setType('todo')}>Todo</button>
-      <button onClick={() => setType('posts')}>Пости</button>
-
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
+    <>
+      <div>
+        <button onClick={() => setResource('posts')}>Posts</button>
+        <button onClick={() => setResource('users')}>Users</button>
+        <button onClick={() => setResource('comments')}>Comments</button>
+      </div>
+      <h1>{resource}</h1>
+      {items.map(item => {
+        return <pre>{JSON.stringify(item)}</pre>
+      })}
+    </>
   );
 }
 

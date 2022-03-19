@@ -46,39 +46,77 @@
 
 
 
-import './App.css';
-import React, { useState, useEffect } from 'react'
+// import './App.css';
+// import React, { useState, useEffect } from 'react'
 
-const App = () => {
+// const App = () => {
 
-  const [type, setType] = useState('users')
-  const [data, setData] = useState([])
+//   const [type, setType] = useState('users')
+//   const [data, setData] = useState([])
 
-  useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/${type}`)
-      .then(response => response.json())
-      .then(json => setData(json))
-  },[type])
+//   useEffect(() => {
+//     fetch(`https://jsonplaceholder.typicode.com/${type}`)
+//       .then(response => response.json())
+//       .then(json => setData(json))
+//   },[type])
 
-  useEffect(() => {
-    localStorage.setItem('data', JSON.stringify(data))
-  },[data])
+//   useEffect(() => {
+//     localStorage.setItem('data', JSON.stringify(data))
+//   },[data])
 
-  useEffect(() => {
-    const raw = localStorage.getItem('data') || []
-    setData(JSON.parse(raw))
-  }, [])
+//   useEffect(() => {
+//     const raw = localStorage.getItem('data') || []
+//     setData(JSON.parse(raw))
+//   }, [])
 
-  return (
-    <div>
-      <h1>Ресурс: {type}</h1>
-      <button onClick={() => setType('users')}>Користувачі</button>
-      <button onClick={() => setType('todo')}>Todo</button>
-      <button onClick={() => setType('posts')}>Пости</button>
+//   return (
+//     <div>
+//       <h1>Ресурс: {type}</h1>
+//       <button onClick={() => setType('users')}>Користувачі</button>
+//       <button onClick={() => setType('todo')}>Todo</button>
+//       <button onClick={() => setType('posts')}>Пости</button>
 
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
-  );
-}
+//       <pre>{JSON.stringify(data, null, 2)}</pre>
+//     </div>
+//   );
+// }
 
-export default App;
+// export default App;
+
+
+
+
+
+// import './App.css';
+// import React, { useState, useEffect } from 'react'
+
+// const App = () => {
+
+//   const [goOut, setGoOut] = useState(0)
+//   const [realGoOut, setRealGoOut] = useState(0)
+//   const [yulia, setYulia] = useState('')
+
+//   useEffect(() => {
+//     setTimeout(() => {
+//       setGoOut((count) => count + 10)
+//     }, 3000)
+//   }, [])
+
+//   useEffect(() => {
+//     let timer = setTimeout(() => {
+//       setRealGoOut((prev) => prev + 30)
+//     }, 6000)
+//     return  () => clearTimeout(timer)
+//   }, [])
+
+//   return (
+//     <div>
+//       <p>За скільки хвилин ти вийдеш по твоїх словах: {goOut}хв</p>
+//       <p>А це реальний час за який ти вийдеш: {realGoOut}хв</p>
+//       <button onClick={() => setYulia((prev) => 'Стецик')}>Mark +</button>
+//       <h1>Юлічька {yulia} </h1>
+//     </div>
+//   );
+// }
+
+// export default App;
