@@ -12,14 +12,14 @@ const App = () => {
       .then(json => setData(json))
   },[type])
 
-  useEffect(() => {
-    localStorage.setItem('data', JSON.stringify(data))
-  },[data])
+  // useEffect(() => {
+  //   localStorage.setItem('data', JSON.stringify(data))
+  // },[data])
 
-  useEffect(() => {
-    const raw = localStorage.getItem('data') || []
-    setData(JSON.parse(raw))
-  }, [])
+  // useEffect(() => {
+  //   const raw = localStorage.getItem('data') || []
+  //   setData(JSON.parse(raw))
+  // }, [])
 
   return (
     <div>
@@ -34,3 +34,4 @@ const App = () => {
 }
 
 export default App;
+
